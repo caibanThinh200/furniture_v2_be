@@ -1,0 +1,10 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var url_1 = require("../Constant/url");
+var Bill_controller_1 = require("../Controller/Bill.controller");
+var route = express_1["default"].Router();
+route.post(url_1["default"].APP.start, Bill_controller_1["default"].AddBillController);
+route.get(url_1["default"].APP.start, Bill_controller_1["default"].GetListBillController);
+route.get(url_1["default"].APP.params.replace("params", "id"), Bill_controller_1["default"].GetDetailBillController);
+exports["default"] = route;

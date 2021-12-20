@@ -1,0 +1,15 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var url_1 = require("../Constant/url");
+var Product_controller_1 = require("../Controller/Product.controller");
+var multer_1 = require("../Config/multer");
+var route = express_1["default"].Router();
+route.post(url_1["default"].APP.start, Product_controller_1["default"].AddProductController);
+route.get(url_1["default"].APP.start, Product_controller_1["default"].GetListProductController);
+route.get(url_1["default"].PRODUCT.init, Product_controller_1["default"].GetInitProductController);
+route.get(url_1["default"].PRODUCT.detail, Product_controller_1["default"].GetDetailProductController);
+route.put(url_1["default"].PRODUCT.detail, multer_1["default"].array("product", 10), Product_controller_1["default"].UpdateProductController);
+route.post(url_1["default"].PRODUCT.excel, Product_controller_1["default"].AddProductByExcelController);
+route.get(url_1["default"].PRODUCT.filter, Product_controller_1["default"].GetFilterProductController);
+exports["default"] = route;

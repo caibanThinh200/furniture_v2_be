@@ -1,0 +1,30 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var http_1 = require("http");
+var function_1 = require("./Utils/function");
+var logger_1 = require("./Config/logger");
+var define_1 = require("./Constant/define");
+var mongodb_1 = require("./Config/mongodb");
+var url_1 = require("./Constant/url");
+var body_parser_1 = require("body-parser");
+var index_routes_1 = require("./Routes/index.routes");
+var cors_1 = require("cors");
+var app = (0, express_1["default"])();
+mongodb_1["default"].getInstance();
+app.use(body_parser_1["default"].raw());
+app.use(body_parser_1["default"].urlencoded({ extended: false }));
+app.use(body_parser_1["default"].json());
+app.use((0, cors_1["default"])());
+(0, index_routes_1["default"])(app);
+app.use(url_1["default"].APP.upload, express_1["default"].static("src/UploadFiles"));
+app.get(url_1["default"].APP.start, function (req, res) {
+    res.send(define_1["default"].SERVICE.start);
+});
+app.get(url_1["default"].APP[404], function (req, res) {
+    res.send(define_1["default"].ERROR[404].replace("%s", function_1["default"].capitalizeFirstLetter("API")));
+});
+var PORT = typeof (process.env.PORT) !== "number" ? function_1["default"].formatInt(process.env.PORT) : process.env.PORT;
+var server = (0, http_1.createServer)(app);
+server.listen(PORT, function () { return logger_1["default"].info(define_1["default"].SERVER.start.replace("%s", PORT.toString())); });
+exports["default"] = app;

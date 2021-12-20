@@ -1,0 +1,13 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var Auth_controller_1 = require("../Controller/Auth.controller");
+var url_1 = require("../Constant/url");
+var auth_middleware_1 = require("../Middleware/auth.middleware");
+var router = (0, express_1["default"])();
+router.post(url_1["default"].AUTH.login, Auth_controller_1["default"].Login);
+router.post(url_1["default"].AUTH.register, auth_middleware_1.ValidateRegister, Auth_controller_1["default"].Register);
+router.get(url_1["default"].AUTH.detail, Auth_controller_1["default"].GetDetailUserController);
+router.get(url_1["default"].AUTH.infoJWT, auth_middleware_1.ValidateJWT, Auth_controller_1["default"].GetUserByJWTController);
+router.put(url_1["default"].APP.params.replace("params", "id"), Auth_controller_1["default"].UpdateUserController);
+exports["default"] = router;

@@ -1,0 +1,14 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var url_1 = require("../Constant/url");
+var ProductType_controller_1 = require("../Controller/ProductType.controller");
+var route = express_1["default"].Router();
+route.post(url_1["default"].PRODUCT_TYPE.excel, ProductType_controller_1["default"].AddProductTypeByExcelController);
+route.post(url_1["default"].APP.start, ProductType_controller_1["default"].AddProductTypeController);
+route.get(url_1["default"].APP.start, ProductType_controller_1["default"].GetListProductTypeController);
+route.get(url_1["default"].PRODUCT_TYPE.all, ProductType_controller_1["default"].GetListAllProductTypeController);
+route.get(url_1["default"].PRODUCT_TYPE.count, ProductType_controller_1["default"].GetProductTypeCountController);
+route.get(url_1["default"].PRODUCT_TYPE.detail, ProductType_controller_1["default"].GetDetailProductTypeController);
+route.put(url_1["default"].PRODUCT_TYPE.detail, ProductType_controller_1["default"].UpdateProductTypeController);
+exports["default"] = route;

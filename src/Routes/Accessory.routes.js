@@ -1,0 +1,12 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var url_1 = require("../Constant/url");
+var Accessory_controller_1 = require("../Controller/Accessory.controller");
+var route = express_1["default"].Router();
+route.post(url_1["default"].APP.start, Accessory_controller_1["default"].AddAccessoryController);
+route.get(url_1["default"].APP.start, Accessory_controller_1["default"].GetListAccessoryController);
+route.get(url_1["default"].ACCESSORY.all, Accessory_controller_1["default"].GetListAllAccessoryController);
+route.get(url_1["default"].APP.params.replace("params", "id"), Accessory_controller_1["default"].GetDetailAccessoryController);
+route.put(url_1["default"].APP.params.replace("params", "id"), Accessory_controller_1["default"].UpdateAccessoryController);
+exports["default"] = route;

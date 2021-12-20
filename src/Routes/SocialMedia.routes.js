@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var url_1 = require("../Constant/url");
+var SocialMedia_controller_1 = require("../Controller/SocialMedia.controller");
+var route = express_1["default"].Router();
+route.post(url_1["default"].APP.start, SocialMedia_controller_1["default"].AddSocialMediaController);
+route.get(url_1["default"].APP.start, SocialMedia_controller_1["default"].GetListSocialMediaController);
+route.get(url_1["default"].APP.params.replace("params", "id"), SocialMedia_controller_1["default"].GetDetailSocialMediaController);
+route.put(url_1["default"].APP.params.replace("params", "id"), SocialMedia_controller_1["default"].UpdateSocialMediaController);
+exports["default"] = route;
